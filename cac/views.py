@@ -7,8 +7,9 @@ from django.urls import reverse
 
 from django.template import loader
 
+
 def index(request):
-    if(request.method=='GET'):
+    if (request.method == 'GET'):
         titulo = 'Titulo cuando se accede por GET - modificado'
     else:
         titulo = f'Titulo cuando accedo por otro metodo {request.method}'
@@ -19,69 +20,74 @@ def index(request):
     # """)
     listado_cursos = [
         {
-            'nombre':'Fullstack Java',
-            'descripcion':'Curso de Fullstack',
-            'categoria':'Programación'
+            'nombre': 'Fullstack Java',
+            'descripcion': 'Curso de Fullstack',
+            'categoria': 'Programación'
         },
         {
-            'nombre':'Diseño UX/IU',
-            'descripcion':'🎨',
-            'categoria':'Diseño'
+            'nombre': 'Diseño UX/IU',
+            'descripcion': '🎨',
+            'categoria': 'Diseño'
         },
         {
-            'nombre':'Big Data',
-            'descripcion':'test',
-            'categoria':'Analisis de Datos'
+            'nombre': 'Big Data',
+            'descripcion': 'test',
+            'categoria': 'Analisis de Datos'
         },
     ]
 
-    return render(request,'cac/index.html',{
-                                    'titulo_nombre':titulo,
-                                    'cursos':listado_cursos,
-                                    'parametros':parameters_get,
-                                    'hoy': datetime.now})
+    return render(request, 'cac/index.html', {
+        'titulo_nombre': titulo,
+        'cursos': listado_cursos,
+        'parametros': parameters_get,
+        'hoy': datetime.now})
+
 
 def quienes_somos(request):
-    #return redirect('saludar_por_defecto')
-    #return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
+    # return redirect('saludar_por_defecto')
+    # return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
     template = loader.get_template('cac/quienes_somos.html')
-    context = {'titulo':'Codo a Codo - Quienes Somos'}
-    return HttpResponse(template.render(context,request))
-    
-def ver_proyectos(request,anio=2022,mes=1):
+    context = {'titulo': 'Codo a Codo - Quienes Somos'}
+    return HttpResponse(template.render(context, request))
+
+
+def ver_proyectos(request, anio=2022, mes=1):
     proyectos = []
-    return render(request,'cac/proyectos.html',{'proyectos':proyectos})
+    return render(request, 'cac/proyectos.html', {'proyectos': proyectos})
+
 
 def ver_cursos(request):
     listado_cursos = [
         {
-            'nombre':'Fullstack Java',
-            'descripcion':'Curso de Fullstack',
-            'categoria':'Programación'
+            'nombre': 'Fullstack Java',
+            'descripcion': 'Curso de Fullstack',
+            'categoria': 'Programación'
         },
         {
-            'nombre':'Diseño UX/IU',
-            'descripcion':'🎨',
-            'categoria':'Diseño'
+            'nombre': 'Diseño UX/IU',
+            'descripcion': '🎨',
+            'categoria': 'Diseño'
         },
         {
-            'nombre':'Big Data',
-            'descripcion':'test',
-            'categoria':'Analisis de Datos'
+            'nombre': 'Big Data',
+            'descripcion': 'test',
+            'categoria': 'Analisis de Datos'
         },
     ]
-    return render(request,'cac/cursos.html',{'cursos':listado_cursos})
+    return render(request, 'cac/cursos.html', {'cursos': listado_cursos})
 
 
 # Create your views here.
 def hola_mundo(request):
     return HttpResponse('Hola Mundo Django')
 
-def saludar(request,nombre='Pepe'):
+
+def saludar(request, nombre='Pepe'):
     return HttpResponse(f"""
         <h1>Hola Mundo Django - {nombre}</h1>
         <p>Estoy haciendo mi primera prueba</p>
     """)
+
 
 def ver_proyectos_2022_07(request):
     return HttpResponse(f"""
@@ -89,19 +95,21 @@ def ver_proyectos_2022_07(request):
         <p>Listado de proyectos</p>
     """)
 
-def ver_proyectos_anio(request,anio):
+
+def ver_proyectos_anio(request, anio):
     return HttpResponse(f"""
         <h1>Proyectos del  {anio}</h1>
         <p>Listado de proyectos</p>
     """)
 
-def cursos_detalle(request,nombre_curso):
+
+def cursos_detalle(request, nombre_curso):
     return HttpResponse(f"""
         <h1>{nombre_curso}</h1>
     """)
 
 
-def cursos(request,nombre):
+def cursos(request, nombre):
     return HttpResponse(f"""
         <h2>{nombre}</h2>
     """)
