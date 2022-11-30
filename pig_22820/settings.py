@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cac'
+    'cac',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -74,12 +75,16 @@ WSGI_APPLICATION = 'pig_22820.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pig_22820', 
+        'USER': 'postgres', 
+        'PASSWORD': 'Fortin94',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -104,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-Ar'
 
 TIME_ZONE = 'UTC'
 
@@ -118,20 +123,44 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# El debug esta en true, busque el directorio static dentro de las applicacion
+#El debug esta en true, busque el directorio static dentro de las applicacion
 STATIC_URL = '/static/'
 
-# El debug true, buscar un directorio static dentro del proyecto
+#El debug true, buscar un directorio static dentro del proyecto
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-# esto se genera en producción y es la que deberemos
-# crear y django ira a buscar ahi
-# python manage.py collectstatic
+#esto se genera en producción y es la que deberemos 
+#crear y django ira a buscar ahi 
+#python manage.py collectstatic
 STATIC_ROOT = BASE_DIR / 'static_root'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#donde vamos a ir guardar los archivos medias debug
+MEDIA_URL = "/media/"
+#media para produccion
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#constante para poder almacenar los mensaje entre solicitudes en cookies
+#https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#configuring-the-message-engine
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+#Configuracion para el envio de email por medio de GMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'CUENTAGOOGLE'
+# Clave generada desde la configuracion de Google
+EMAIL_HOST_PASSWORD = 'CONTRASEÑA DE APLICACION DE CUENTA GOOGLE' 
+RECIPIENT_ADDRESS = 'test@email.com'
+
+LOGIN_URL = '/cuentas/login/'
+
+LOGIN_REDIRECT_URL = 'inicio'
+# LOGOUT_REDIRECT_URL = 'inicio'
