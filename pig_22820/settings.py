@@ -78,11 +78,12 @@ WSGI_APPLICATION = 'pig_22820.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pig_22820', 
-        'USER': 'postgres', 
+        'NAME': 'pig_22820',
+        'USER': 'postgres',
         'PASSWORD': 'Fortin94',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        # localhost en caso de tenerlo en local y la URL de la base de datos en caso de tenerlo en algún servicio en la nube
+        'HOST': 'localhost',
+        'PORT': '5432'  # Si usas el puerto default no pongas esta línea y si lo has cambiado especifícaselo aquí
     }
 }
 
